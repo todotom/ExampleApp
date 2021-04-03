@@ -23,6 +23,16 @@ def handle_submit():
             "lastName": last_name,
             "job": job
         })
+    
+@api.route('/items', methods=['POST'])
+def handle_item_post():
+    if request.method == "POST":
+        first_name = request.form['firstName']
+        last_name = request.form['lastName']
+        job = request.form['job']
+        print(f'first name : {first_name}')
+        print(f'last name : {last_name}')
+        print(f'job : {job}')
 
 
 app.register_blueprint(api, url_prefix='/api')
