@@ -98,7 +98,7 @@ export default function BasicForm() {
                 <TextField
                     required
                     name="job"
-                    id="firstname"
+                    id="job"
                     label="Job"
                     fullWidth={true}
                     value={job}
