@@ -20,26 +20,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ItemSubmitForm() {
     const url = "api/items";
+
     const classes = useStyles();
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
 
-    const [identity, setIdentity] = useState({ firstName: "", lastName: "" });
-    const [job, setJob] = useState("");
     const [success, setSuccess] = useState(undefined);
-
-    function handleInputFirstName(e) {
-        setIdentity({ ...identity, firstName: e.target.value });
-    }
-
-    function handleInputLastName(e) {
-        setIdentity({ ...identity, lastName: e.target.value });
-    }
-
-    function handleInputJob(e) {
-        setJob(e.target.value);
-    }
 
     function handleInputName(e) {
         setName(e.target.value);
@@ -51,10 +39,6 @@ export default function ItemSubmitForm() {
 
     function handleInputPrice(e) {
         setPrice(e.target.value);
-    }
-
-    function formatPrice(price) {
-        return `${price} €`
     }
 
     function handleSubmit(e) {

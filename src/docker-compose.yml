@@ -17,9 +17,22 @@ services:
     build: ./backend
     expose:
       - 5000
+    links:
+      - database
     volumes:
       - ./backend:/usr/src/app
     environment:
       - FLASK_ENV=development
       - FLASK_APP=app.py
       - FLASK_DEBUG=1
+  
+  database:
+    image: mariadb/server:10.5
+    restart: always
+    container_name: database
+    ports:
+      - 32000:3306
+    environment: 
+      - MARIADB_ROOT_PASSWORD=Password123!
+    volumes: 
+      - ./database:/docker-entrypoint-initdb.d/:ro
