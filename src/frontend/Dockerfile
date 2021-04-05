@@ -9,8 +9,12 @@ COPY . /usr/src/app
 RUN npm run build
 
 FROM nginx:1.19.9-alpine
+
+ARG APP_ENV=dev
+#ENV NGINX_ENV ${APP_ENV}
+
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx/nginx.${APP_ENV}.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

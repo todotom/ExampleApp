@@ -5,11 +5,16 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args: 
+      - APP_ENV=${APP_ENV}
+      #- APP_ENV=prod
+
     ports:
       - 80:80
       - 443:443
     volumes:
       - /home/ubuntu/ssl:/etc/nginx/certs
+    
 
   backend:
     restart: always
