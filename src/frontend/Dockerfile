@@ -10,8 +10,8 @@ RUN npm run build
 
 FROM nginx:1.19.9-alpine
 
-ARG APP_ENV=dev
-#ENV NGINX_ENV ${APP_ENV}
+ARG APP_ENV=${APP_ENV}
+#ENV APP_ENV ${APP_ENV}
 
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 COPY ./nginx/nginx.${APP_ENV}.conf /etc/nginx/nginx.conf
