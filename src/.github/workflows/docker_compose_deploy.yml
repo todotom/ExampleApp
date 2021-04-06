@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Build the docker-compose stack
-        run: sudo docker-compose --env-file .env.prod up --build
+        run: sudo docker-compose --env-file src/.env.prod up --build
       - name: Check running containers
         run: docker ps -a
