@@ -2,14 +2,13 @@
 import logo from './logo.svg';
 import './App.css';
 */
-import BasicForm from './BasicForm/BasicForm';
+import ItemsListTable from './ItemsListTable/ItemsListTable';
 import ItemSubmitForm from './ItemSubmitForm/ItemSubmitForm';
 
 function App() {
   return (
-
-      <ItemSubmitForm />
-    //<BasicForm />
+    <ItemsListTable />
+    //<ItemSubmitForm />
     /*
     <div className="App">
       <header className="App-header">

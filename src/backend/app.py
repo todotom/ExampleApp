@@ -43,12 +43,14 @@ def handle_item_post():
         description = request.form['description']
         price = request.form['price']
 
+
+
 @api.route('/items', methods=['GET'])
 def handle_items_get():
     if request.method == "GET":
         #connection = mariadb.connect(**database_config)
         connection = connect_database()
-    
+
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM items")
 
@@ -56,7 +58,7 @@ def handle_items_get():
         rv = cursor.fetchall()
         json_data=[]
         for result in rv:
-                json_data.append(dict(zip(row_headers,result)))
+            json_data.append(dict(zip(row_headers,result)))
 
         return json.dumps(json_data)
 
