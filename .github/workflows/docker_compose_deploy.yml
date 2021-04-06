@@ -11,9 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Go to deploy directory:
-        run: cd src
       - name: Build the docker-compose stack
-        run: sudo docker-compose --env-file .env.prod up --build
+        run: cd src && sudo docker-compose --env-file .env.prod up --build
       - name: Check running containers
         run: docker ps -a
