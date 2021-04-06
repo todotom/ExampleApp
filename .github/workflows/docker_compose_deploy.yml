@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Go to deploy directory:
+      - name: Go to deploy directory
         run: cd src
       - name: Build the docker-compose stack
         run: sudo docker-compose --env-file .env.prod up --build
