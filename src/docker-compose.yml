@@ -2,42 +2,44 @@ version: "3"
 services:
   frontend:
     container_name: frontend
+    restart: always
     build:
       context: ./frontend
       dockerfile: Dockerfile
       args: 
       - APP_ENV=${APP_ENV}
-      #- APP_ENV=prod
-
     ports:
       - 80:80
       - 443:443
+    links:
+      - backend
     volumes:
       - /home/ubuntu/ssl:/etc/nginx/certs
     
 
   backend:
-    restart: always
     container_name: backend
+    restart: always
     build: ./backend
-    expose:
-      - 5000
+    ports:
+      - 5000:5000
     links:
       - database
-    volumes:
-      - ./backend:/usr/src/app
     environment:
-      - FLASK_ENV=development
+      - FLASK_ENV=${APP_ENV}
       - FLASK_APP=app.py
       - FLASK_DEBUG=1
+      - DB_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./backend:/usr/src/app
   
   database:
-    image: mariadb/server:10.5
-    restart: always
     container_name: database
+    restart: always
+    image: mariadb/server:10.5
     ports:
       - 32000:3306
     environment: 
-      - MARIADB_ROOT_PASSWORD=Password123!
+      - MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
     volumes: 
       - ./database:/docker-entrypoint-initdb.d/:ro
