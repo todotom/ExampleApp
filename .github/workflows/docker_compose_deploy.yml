@@ -21,6 +21,7 @@ jobs:
             sudo git stash && 
             sudo git pull && 
             cd src && 
+            sudo docker-compose down && 
             sudo docker-compose --env-file .env.prod up --build
       # - name: Build the docker-compose stack
       #   run: cd src && sudo docker-compose --env-file .env.prod up --build
