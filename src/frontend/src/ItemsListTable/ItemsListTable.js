@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -6,6 +6,14 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 import axios from "axios";
 
@@ -38,20 +46,13 @@ export default function ItemsListTable() {
             })
                 .then(response => {
                     //console.log(response);
-                    setSuccess(true);
-                    const array = response.data;
-                    array.forEach(listItems);
-    
-                    function listItems(item) {
-                        alert(`${item.name}: ${item.price}`);
-                    }
-    
-                    setItems(array);
+                    // setSuccess(true);
+
+                    setItems(response.data);
                 })
                 .catch(response =>{
-                    setSuccess(false);
+                    // setSuccess(false);
                     //console.log(response);
-                    alert('pito');
                 });
     }
 
@@ -66,43 +67,48 @@ export default function ItemsListTable() {
     }
 
     function formatItemsList() {
-        getItems();
-
         return (
-            <>
+            <React.Fragment>
                 {
                     items.map(item => (
-                        <tr>
-                            <td> {item.name} </td>
-                            <td> {item.description} </td>
-                            <td> {item.price} </td>
-                        </tr>
+                        <TableRow key={item.name}>
+                            <TableCell component="th" scope="row">{item.name}</TableCell>
+                            <TableCell>{item.description}</TableCell>
+                            <TableCell>{item.price}</TableCell>
+                        </TableRow>
                     ))
                 }
-            </>
+            </React.Fragment>
         )
     }
 
+    useEffect(() => {
+        getItems();
+    }, []);
+
     return (
         <Container>
-            <Grid container justify="center">
+            <Grid container justify="center" direction="column">
                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {formatItemsList}
-                    </tbody>
-                </table>
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="Items">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>Description</TableCell>
+                                    <TableCell>Price</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {formatItemsList()}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <Typography align="center">
-                        <Button color="primary" variant="contained" onClick={handleGetItems}>
+                        <Button color="primary" variant="contained" 
+                        onClick={handleGetItems}>
                             Get items
                         </Button>
                         <div style={{ marginTop: 10 }}>
