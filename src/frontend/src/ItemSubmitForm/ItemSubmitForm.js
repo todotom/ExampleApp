@@ -118,7 +118,7 @@ export default function ItemSubmitForm() {
 
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <Typography align="center">
-                        <Button type="submit" color="primary" variant="contained">
+                        <Button type="submit" color="primary" variant="contained" marginTop="10">
                             Submit
                         </Button>
                         <div style={{ marginTop: 10 }}>
