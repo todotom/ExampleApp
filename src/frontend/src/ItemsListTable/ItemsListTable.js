@@ -92,7 +92,7 @@ export default function ItemsListTable() {
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                     <TableContainer component={Paper}>
                         <Table className={classes.table} aria-label="Items">
-                            <TableHead>
+                            <TableHead className={classes.table}>
                                 <TableRow>
                                     <TableCell>Name</TableCell>
                                     <TableCell>Description</TableCell>
